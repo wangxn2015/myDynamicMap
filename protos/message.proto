@@ -1,0 +1,45 @@
+syntax  = "proto3";
+//import "gogoproto/gogo.proto";
+
+message Point {
+    double lat = 1;
+    double lng = 2;
+}
+
+message Route {
+    uint64 name = 1 ;//[(gogoproto.customname) = "RouteID", (gogoproto.casttype) = "IMSI"];
+
+    repeated Point waypoints = 2;
+
+    string color = 3;
+
+    uint32 speed_avg = 4;
+
+    uint32 speed_stdev = 5;
+
+    bool reverse = 6;
+
+    uint32 next_point = 7;
+}
+
+message Ue {
+    uint64 imsi = 1 ;//[(gogoproto.customname) = "IMSI", (gogoproto.casttype) = "IMSI"];
+    uint32 rotation = 5;
+}
+
+
+message UePositionRequest {
+    uint64 process_code = 1;
+    repeated uint64 imsi = 2;
+}
+
+message UePositionReply {
+
+    uint64 imsi = 1;
+    Point point = 2;
+}
+
+service Ues {
+    rpc GetUes (UePositionRequest) returns (stream UePositionReply);
+}
+
