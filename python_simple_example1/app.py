@@ -21,7 +21,7 @@ def index():
 @app.route('/ues')
 def ues_get():
     # app.config['ues'] = ServiceClient(msg_pb2_grpc, 'UEsStub', 'UEs', 50051)
-    app.config['ues'] = ServiceClient(msg_pb2_grpc, 'UEsStub', 'localhost', 50051)
+    app.config['ues'] = ServiceClient(msg_pb2_grpc, 'UEsStub', '127.0.0.1', 50051)
     request = msg_pb2.UERequest(
             procesureCode=1
         )
